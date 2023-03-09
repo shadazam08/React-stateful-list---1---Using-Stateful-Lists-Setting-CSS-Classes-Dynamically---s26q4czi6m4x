@@ -27,13 +27,35 @@ const data = {
   ]
 }
 const App = () => {
+  const [option, setOption] = useState(null);
 
   return (
     <div id="main">
-      
+      <select
+        onChange={(e) => {
+          setOption(e.target.value);
+        }}
+      >
+        <option value={null}></option>
+        <option value={2018}>2018</option>
+        <option value={2019}>2019</option>
+        <option value={2020}>2020</option>
+        <option value={2021}>2021</option>
+        <option value={2022}>2022</option>
+      </select>
+      <div id="selected-year" style={{ marginTop: 5 }}>
+        {option === null ? "No year selected" : "Selected year-" + option}
+      </div>
+      {option === null ? null : (
+        <ul>
+          {data[option].map((e, i) => (
+            <li key={i}>{e}</li>
+          ))}
+        </ul>
+      )}
     </div>
-  )
-}
+  );
+};
 
 
 export default App;
